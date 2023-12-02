@@ -63,7 +63,7 @@ namespace FileUpload.Controllers
                 .OrderByDescending(f => f.DocumentId)
                 .ToList();
 
-            return View(fileList);
+            return View(model: fileList);
         }
     }
 }
