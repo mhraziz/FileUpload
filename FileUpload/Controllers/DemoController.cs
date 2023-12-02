@@ -1,5 +1,9 @@
 ﻿using FileUpload.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace FileUpload.Controllers
 {
@@ -44,11 +48,22 @@ namespace FileUpload.Controllers
                         objfiles.DataFiles = target.ToArray();
                     }
 
-                    _context.Files.Add(objfiles);
+                    _context.File.Add(objfiles);
                     _context.SaveChanges();
+
+                    return RedirectToAction("Gallery");
                 }
             }
             return View();
+        }
+
+        public IActionResult Gallery()
+        {
+            var fileList = _context.File
+                .OrderByDescending(f => f.DocumentId)
+                .ToList();
+
+            return View(fileList);
         }
     }
 }
