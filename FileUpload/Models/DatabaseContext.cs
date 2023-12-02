@@ -7,7 +7,7 @@ namespace FileUpload.Models
             public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
             {
             }
-            public DbSet<Files> Files { get; set; }
+            public DbSet<Files> File { get; set; }
         }
     
 }
