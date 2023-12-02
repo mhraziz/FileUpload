@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace FileUpload.Models
 {
     [Table("Files")]
@@ -18,5 +17,7 @@ namespace FileUpload.Models
         [MaxLength]
         public byte[] DataFiles { get; set; }
         public DateTime? CreatedOn { get; set; }
+
+      
     }
 }
