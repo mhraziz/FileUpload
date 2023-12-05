@@ -6,25 +6,26 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FileUpload.Models;
-using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace FileUpload.Controllers
 {
     public class DemoController : Controller
     {
-        private readonly string wwwrootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-
         private readonly DatabaseContext _context;
         public DemoController(DatabaseContext context)
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
-
             return View();
         }
-
 
         [HttpPost]
         public IActionResult Index(IFormFile files)
@@ -54,18 +55,22 @@ namespace FileUpload.Controllers
                         objfiles.DataFiles = target.ToArray();
                     }
 
-                    _context.Files.Add(objfiles);
+                    _context.File.Add(objfiles);
                     _context.SaveChanges();
 
+                    return RedirectToAction("Gallery");
                 }
             }
             return View();
+        }
 
+        public IActionResult Gallery()
+        {
+            var fileList = _context.File
+                .OrderByDescending(f => f.DocumentId)
+                .ToList();
 
-
-
-
-
+            return View(model: fileList);
         }
     }
 }

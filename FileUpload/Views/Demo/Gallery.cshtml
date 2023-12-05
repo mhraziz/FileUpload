@@ -1,0 +1,20 @@
+﻿@model IEnumerable<FileUpload.Models.Files>
+
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<h1>Gallery</h1>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        var base64String = $"data:image/png;base64,{Convert.ToBase64String(item.DataFiles, 0, item.DataFiles.Length)}";
+        <img src="@base64String" alt="@item.Name" width="220" height="220" />
+    }
+}
+else
+{
+    <p>No record found!</p>
+}

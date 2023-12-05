@@ -28,8 +28,6 @@ namespace FileUpload
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuartion.GetConnectionString("DatabaseConnection")));
         }
 
-
-
         /*public void ConfigureServices(IServiceCollection services)
         {
             //Getting Connection String from appsettings.json
@@ -60,11 +58,9 @@ namespace FileUpload
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Demo}/{action=Index}/{id?}");
             });
         }
-
-
 
     }
 }
